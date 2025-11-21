@@ -27,7 +27,11 @@ resource "aws_iam_policy" "app_policy" {
   "Statement": [
     {
       "Effect": "Allow",
-      "Action": "*",                             # Issue 2: wildcard actions
+      "Action": [                               # Fixed: Replaced wildcard "*" with specific actions
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:ListBucket"
+      ],
       "Resource": "*"                            # Issue 3: wildcard resources
     }
   ]
