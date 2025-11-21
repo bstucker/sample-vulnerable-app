@@ -27,15 +27,12 @@ resource "aws_iam_policy" "app_policy" {
   "Statement": [
     {
       "Effect": "Allow",
-      "Action": [
+      "Action": [                               # Fixed: Replaced wildcard "*" with specific actions
         "s3:GetObject",
-        "s3:ListBucket",
-        "s3:PutObject"
-      ],                                        # Fixed: Replaced wildcard "*" with specific required S3 actions
-      "Resource": [
-        "arn:aws:s3:::sample-app-terraform-bucket-12345",
-        "arn:aws:s3:::sample-app-terraform-bucket-12345/*"
-      ]                                         # Fixed: Replaced wildcard "*" with specific bucket resources
+        "s3:PutObject",
+        "s3:ListBucket"
+      ],
+      "Resource": "*"                            # Issue 3: wildcard resources
     }
   ]
 }
